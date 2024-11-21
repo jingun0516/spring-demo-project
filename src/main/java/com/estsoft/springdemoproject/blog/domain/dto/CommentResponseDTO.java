@@ -25,7 +25,9 @@ public class CommentResponseDTO {
         commentId = comment.getId();
         articleId = articleFromComment.getId();
         body = comment.getBody();
-        createdAt = comment.getCreatedAt().format(formatter);
+        if(comment.getCreatedAt() != null) {
+            createdAt = comment.getCreatedAt().format(formatter);
+        }
         article = new ArticleResponse(articleFromComment);
     }
 }

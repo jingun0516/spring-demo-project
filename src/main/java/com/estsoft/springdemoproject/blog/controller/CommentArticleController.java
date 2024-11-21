@@ -18,7 +18,7 @@ public class CommentArticleController {
         this.commentService = commentService;
     }
 
-    @PostMapping(name = "/api/articles/{articleId}/comments")
+    @PostMapping("/api/articles/{articleId}/comments")
     public ResponseEntity<CommentResponseDTO> saveCommentByArticleId(@PathVariable Long articleId,
                                                                      @RequestBody CommentRequestDTO request) {
         Comment comment = commentService.saveComment(articleId, request);

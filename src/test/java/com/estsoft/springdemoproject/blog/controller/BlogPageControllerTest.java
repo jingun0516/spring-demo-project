@@ -13,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +53,7 @@ class BlogPageControllerTest {
                 .map(ArticleViewResponse::new)
                 .toList();
 
+        // when
         ResultActions resultActions = mockMvc.perform(get("/articles"));
 
         //then
@@ -63,10 +65,35 @@ class BlogPageControllerTest {
     }
 
     @Test
-    void showDetails() {
+    void showDetails() throws Exception {
+        // given
+        Long id = 1L;
+        Article article = new Article();
+
+        Mockito.when(blogService.findBy(id))
+                .thenReturn(article);
+
+        // when
+        ResultActions resultActions = mockMvc.perform(get("/articles/{id}", id));
+
+        // then
+        resultActions.andExpect(view().name("article"))
+                .andExpect(model().attributeExists("article"))
+        ;
     }
 
     @Test
-    void addArticle() {
+    void addArticle() throws Exception {
+        // given
+        Long id = 1L;
+        Article article = new Article();
+
+        // when
+        ResultActions resultActions = mockMvc.perform(get("/new-article"));
+
+        // then
+        resultActions.andExpect(view().name("newArticle"))
+                .andExpect(model().attributeExists("article"))
+        ;
     }
 }
