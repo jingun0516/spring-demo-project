@@ -31,8 +31,8 @@ public class CommentService {
     }
 
     public Comment update(Long commentId, CommentRequestDTO request) {
-        Comment comment = commentRepository.findById(commentId).orElseThrow();
-        // 수정
+        Comment comment = commentRepository.findById(commentId).orElse(new Comment());
+
         comment.updateCommentBody(request.getBody());
 
         return commentRepository.save(comment);

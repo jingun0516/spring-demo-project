@@ -12,13 +12,13 @@ public class UserViewController {
     // GET /login  -> login 페이지 연결
     @GetMapping("/login")
     public String login() {
-        return "login";
+        return "login2";
     }
 
     // GET /signup -> 회원가입 페이지 연결
     @GetMapping("/signup")
     public String signup() {
-        return "signup";
+        return "signup2";
     }
 
     @GetMapping("/logout")
